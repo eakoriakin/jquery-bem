@@ -1,5 +1,4 @@
 ﻿$(function () {
-    // Bem static members.
     var bem = {};
     window.bem = bem;
 
@@ -101,7 +100,7 @@
         }
 
         return "";
-    };
+    }
 
     bem.blockModifier = function () {
         /// <signature>
@@ -168,11 +167,20 @@
                 }
 
                 if (isNullOrWhiteSpace(modifier.value)) {
-                    resultingCssClass.append(blockName + bem.modifierSeparator + modifier.name + " ");
+                    // Adding modifier without value.
+                    resultingCssClass.append(blockName)
+                        .append(bem.modifierSeparator)
+                        .append(modifier.name)
+                        .append(" ");
                 }
-
                 else {
-                    resultingCssClass.append(blockName + bem.modifierSeparator + modifier.name + bem.modifierValueSeparator + modifier.value + " ");
+                    // Adding modifier with value.
+                    resultingCssClass.append(blockName)
+                        .append(bem.modifierSeparator)
+                        .append(modifier.name)
+                        .append(bem.modifierValueSeparator)
+                        .append(modifier.value)
+                        .append(" ");
                 }
             }
 
@@ -180,7 +188,7 @@
         }
 
         return "";
-    };
+    }
 
     bem.splitCssClasses = function (cssClasses) {
         /// <summary>
@@ -215,7 +223,7 @@
         }
 
         return newCssClasses;
-    };
+    }
 
     bem.splitModifiers = function (modifiers) {
         /// <summary>
@@ -259,6 +267,104 @@
         return newModifiers;
     }
 
+    bem.elementModifier = function () {
+        /// <signature>
+        /// <summary>
+        /// Creates element modifier CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="elementName" type="String">Element name.</param>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <returns type="String">Element modifier CSS-class.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Creates element modifier CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="elementName" type="String">Element name.</param>
+        /// <param name="modifierName" type="String">Modifier name.</param>
+        /// <param name="modifierValue" type="String">Modifier value.</param>
+        /// <returns type="String">Element modifier CSS-class.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Creates element modifier CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="elementName" type="String">Element name.</param>
+        /// <param name="modifiers" type="Array">List of modifiers.</param>
+        /// <returns type="String">Element modifier CSS-class.</returns>
+        /// </signature>
+        if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
+            var blockName = $.trim(arguments[0]),
+                elementName = $.trim(arguments[1]),
+                modifier = $.trim(arguments[2]);
+
+            if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || isNullOrWhiteSpace(modifier)) {
+                return "";
+            }
+
+            return bem.elementModifier(blockName, elementName, bem.splitModifiers(modifier));
+        }
+        else if (arguments.length === 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "string") {
+            var blockName = $.trim(arguments[0]),
+                elementName = $.trim(arguments[1]),
+                modifierName = $.trim(arguments[2]),
+                modifierValue = $.trim(arguments[3]);
+
+            if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || isNullOrWhiteSpace(modifierName) || isNullOrWhiteSpace(modifierValue)) {
+                return "";
+            }
+
+            return blockName + bem.elementSeparator + elementName + bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
+        }
+        else if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && $.isArray(arguments[2])) {
+            var blockName = $.trim(arguments[0]),
+                elementName = $.trim(arguments[1]),
+                modifiers = arguments[2];
+
+            if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || modifiers.length == 0) {
+                return "";
+            }
+
+            var resultingCssClass = new StringBuilder();
+
+            for (var i = 0; i < modifiers.length; i++) {
+                var modifier = modifiers[i];
+
+                if (isNullOrWhiteSpace(modifier.name)) {
+                    continue;
+                }
+
+                if (isNullOrWhiteSpace(modifier.value)) {
+                    // Adding modifier without value.
+                    resultingCssClass.append(blockName)
+                        .append(bem.elementSeparator)
+                        .append(elementName)
+                        .append(bem.modifierSeparator)
+                        .append(modifier.name)
+                        .append(" ");
+                }
+                else {
+                    // Adding modifier with value.
+                    resultingCssClass.append(blockName)
+                        .append(bem.elementSeparator)
+                        .append(elementName)
+                        .append(bem.modifierSeparator)
+                        .append(modifier.name)
+                        .append(bem.modifierValueSeparator)
+                        .append(modifier.value)
+                        .append(" ");
+                }
+            }
+
+            return $.trim(resultingCssClass.toString());
+        }
+
+        return "";
+    }
+
     // Methods (private).
     function isNullOrWhiteSpace(value) {
         if (value === null || value === undefined) {
@@ -266,7 +372,7 @@
         }
 
         return value.replace(/\s/g, '').length < 1;
-    };
+    }
 
     // Nested types.
     function StringBuilder() {
@@ -280,9 +386,9 @@
         this.toString = function () {
             return this.strings.join("");
         }
-    };
+    }
 
-    // Bem jQuery-extension.
+    // jQuery-extension.
     var bemExtension = function () {
         var $element = this;
 
@@ -295,7 +401,7 @@
         };
 
         return methods;
-    };
+    }
 
     jQuery.fn.extend({ bem: bemExtension });
 });

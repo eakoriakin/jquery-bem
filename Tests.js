@@ -30,7 +30,25 @@ test("blockModifier", function () {
     strictEqual(
         bem.blockModifier("block", "size", "xs"),
         "block_size_xs",
-        "Creates block modifier CSS-class with single modifier."
+        "Creates block modifier CSS-class with a single modifier."
+    );
+});
+
+test("elementModifier", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.elementModifier("block", "element", "is-enabled is-focused size_xs"),
+        "block__element_is-enabled block__element_is-focused block__element_size_xs",
+        "Creates element modifier CSS-class with multiple modifiers."
+    );
+});
+
+test("elementModifier", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.elementModifier("block", "element", "size", "xs"),
+        "block__element_size_xs",
+        "Creates element modifier CSS-class with a single modifier."
     );
 });
 
