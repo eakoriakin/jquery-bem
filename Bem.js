@@ -8,58 +8,99 @@
     bem.modifierSeparator = "_";
     bem.modifierValueSeparator = "_";
 
-    //bem.block = function (blockName, modifier, cssClass) {
-    //    /// <summary>
-    //    /// Creates block CSS-class.
-    //    /// </summary>
-    //    /// <param name="blockName" type="String">Block name.</param>
-    //    /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-    //    /// <param name="cssClass" type="String">One or more additional CSS-classes, separated by a space.</param>
-    //    /// <returns type="String">Block CSS-class.</returns>
-    //    if (!blockName) {
-    //        return "";
-    //    }
-
-    //    blockName = $.trim(blockName);
-    //    modifier = $.trim(modifier);
-    //    cssClass = $.trim(cssClass);
-
-    //    var modifiers = modifier.split(" "),
-    //        cssClasses = cssClass.split(" ");
-
-    //    var resultingCssClass = blockName + " ";
-
-    //    // Adding modifiers.
-    //    for (var i = 0; i < modifiers.length; i++) {
-    //        var trimmedModifier = $.trim(modifiers[i]);
-
-    //        if (trimmedModifier) {
-    //            resultingCssClass += blockName + "_" + trimmedModifier + " ";
-    //        }
-    //    }
-
-    //    // Adding additional CSS-classes.
-    //    for (var i = 0; i < cssClasses.length; i++) {
-    //        var trimmedCssClass = $.trim(cssClasses[i]);
-
-    //        if (trimmedCssClass) {
-    //            resultingCssClass += trimmedCssClass + " ";
-    //        }
-    //    }
-
-    //    return $.trim(resultingCssClass);
-    //};
-
     // Methods.
     bem.block = function () {
+        /// <signature>
+        /// <summary>
+        /// Creates block CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <returns type="String">Block CSS-class.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Creates block CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <param name="cssClass" type="String">One or more additional CSS-classes, separated by a space.</param>
+        /// <returns type="String">Block CSS-class.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Creates block CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="modifiers" type="Array">List of modifiers.</param>
+        /// <returns type="String">Block CSS-class.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Creates block CSS-class.
+        /// </summary>
+        /// <param name="blockName" type="String">Block name.</param>
+        /// <param name="modifiers" type="Array">List of modifiers.</param>
+        /// <param name="cssClasses" type="Array">List of CSS-classes.</param>
+        /// <returns type="String">Block CSS-class.</returns>
+        /// </signature>
         if (arguments.length === 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
+            var blockName = $.trim(arguments[0]),
+                modifier = $.trim(arguments[1]);
+
+            if (isNullOrWhiteSpace(blockName)) {
+                return "";
+            }
+
+            return blockName + " " + bem.blockModifier(blockName, modifier);
         }
         else if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
+            var blockName = $.trim(arguments[0]),
+                modifier = $.trim(arguments[1]),
+                cssClass = $.trim(arguments[2]);
+
+            return bem.block(blockName, bem.splitModifiers(modifier), bem.splitCssClasses(cssClass));
         }
         else if (arguments.length === 2 && typeof arguments[0] === "string" && $.isArray(arguments[1])) {
+            var blockName = $.trim(arguments[0]),
+                modifiers = arguments[1];
+
+            if (isNullOrWhiteSpace(blockName)) {
+                return "";
+            }
+
+            return blockName + " " + bem.blockModifier(blockName, modifiers);
         }
         else if (arguments.length === 3 && typeof arguments[0] === "string" && $.isArray(arguments[1]) && $.isArray(arguments[2])) {
+            var blockName = $.trim(arguments[0]),
+                modifiers = arguments[1],
+                cssClasses = arguments[2];
+
+            if (isNullOrWhiteSpace(blockName)) {
+                return "";
+            }
+
+            var resultingCssClass = new StringBuilder()
+                .append(blockName + " ");
+
+            // Adding modifiers.
+            if (modifiers.length > 0) {
+                resultingCssClass.append(bem.blockModifier(blockName, modifiers) + " ");
+            }
+
+            // Adding additional CSS-classes.
+            if (cssClasses.length > 0) {
+                for (var i = 0; i < cssClasses.length; i++) {
+                    if (!isNullOrWhiteSpace(cssClasses[i])) {
+                        resultingCssClass.append(cssClasses[i] + " ");
+                    }
+                }
+            }
+
+            return $.trim(resultingCssClass.toString());
         }
+
+        return "";
     };
 
     bem.blockModifier = function () {
@@ -121,27 +162,24 @@
 
             for (var i = 0; i < modifiers.length; i++) {
                 var modifier = modifiers[i];
-    
+
                 if (isNullOrWhiteSpace(modifier.name)) {
                     continue;
                 }
 
-                if (isNullOrWhiteSpace(modifier.value))
-                {
+                if (isNullOrWhiteSpace(modifier.value)) {
                     resultingCssClass.append(blockName + bem.modifierSeparator + modifier.name + " ");
                 }
 
-                else
-                {
+                else {
                     resultingCssClass.append(blockName + bem.modifierSeparator + modifier.name + bem.modifierValueSeparator + modifier.value + " ");
                 }
             }
 
             return $.trim(resultingCssClass.toString());
         }
-        else {
-            return "";
-        }
+
+        return "";
     };
 
     bem.splitCssClasses = function (cssClasses) {
