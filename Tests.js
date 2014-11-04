@@ -34,6 +34,33 @@ test("blockModifier", function () {
     );
 });
 
+test("element", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.element("block", "element"),
+        "block__element",
+        "Creates element CSS-class."
+    );
+});
+
+test("element", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.element("block", "element", "is-enabled is-focused size_xs"),
+        "block__element block__element_is-enabled block__element_is-focused block__element_size_xs",
+        "Creates element CSS-class with modifiers."
+    );
+});
+
+test("element", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.element("block", "element", "is-enabled is-focused size_xs", "clearfix"),
+        "block__element block__element_is-enabled block__element_is-focused block__element_size_xs clearfix",
+        "Creates element CSS-class with modifiers and CSS-classes."
+    );
+});
+
 test("elementModifier", function () {
     // Act & Assert.
     strictEqual(
