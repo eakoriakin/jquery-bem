@@ -668,19 +668,35 @@
         }
     }
 
-    // jQuery-extension.
+    // jQuery-extensions.
     $.fn.blockName = function () {
         /// <summary>
-        /// Returns the name of the block of the current block or element.
+        /// Returns the name of the block of the first block or element in the set of jQuery-elements.
         /// <para>The name of the block is taken from the first CSS-class.</para>
         /// </summary>
-        /// <returns type="String">The name of the block of the current block or element.</returns>
+        /// <returns type="String">The name of the block.</returns>
         var cssClass = this.eq(0).attr("class"),
             firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
 
         if (firstCssClass) {
             // Splitting in case if the current jQuery-object is an element.
             return firstCssClass.split(bem.elementSeparator)[0];
+        }
+
+        return "";
+    }
+
+    $.fn.elementName = function () {
+        /// <summary>
+        /// Returns the name of the element of the first element in the set of jQuery-elements.
+        /// <para>The name of the element is taken from the first CSS-class.</para>
+        /// </summary>
+        /// <returns type="String">The name of the element.</returns>
+        var cssClass = this.eq(0).attr("class"),
+            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+        if (firstCssClass) {
+            return firstCssClass.split(bem.elementSeparator)[1];
         }
 
         return "";

@@ -483,3 +483,31 @@ test("$.fn.blockName: Returns an empty string if the DOM-element does have a cla
     // Clean.
     $html.empty();
 });
+
+test("$.fn.elementName: Returns the name of the element", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name product_name_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    equal($(".product__name").elementName(), "name");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.elementName: Returns an empty string if the DOM-element does have a class", function () {
+    // Arrange.
+    var html = "\
+        <div id='product'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    equal($("#product").elementName(), "");
+
+    // Clean.
+    $html.empty();
+});
