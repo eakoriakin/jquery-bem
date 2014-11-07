@@ -417,14 +417,14 @@
     bem.getBlock = function () {
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifier" type="String">The modifier.</param>
@@ -432,7 +432,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
@@ -441,7 +441,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="context" type="jQuery">A DOM-element or jQuery-object to search in.</param>
@@ -449,7 +449,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifier" type="String">The modifier.</param>
@@ -458,7 +458,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched blocks.
+        /// Returns a collection of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
@@ -491,7 +491,7 @@
     bem.getElement = function () {
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -499,7 +499,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -508,7 +508,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -518,7 +518,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -527,7 +527,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -537,7 +537,7 @@
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Gets a collection of matched elements.
+        /// Returns a collection of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
@@ -669,15 +669,42 @@
     }
 
     // jQuery-extension.
-    var bemExtension = function () {
-        var $element = this;
+    $.fn.blockName = function () {
+        /// <summary>
+        /// Returns the name of the block of the current block or element.
+        /// <para>The name of the block is taken from the first CSS-class.</para>
+        /// </summary>
+        /// <returns type="String">The name of the block of the current block or element.</returns>
+        var cssClass = this.eq(0).attr("class"),
+            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
 
-        var methods = {
+        if (firstCssClass) {
+            // Splitting in case if the current jQuery-object is an element.
+            return firstCssClass.split(bem.elementSeparator)[0];
+        }
 
-        };
-
-        return methods;
+        return "";
     }
 
-    jQuery.fn.extend({ bem: bemExtension });
+    /*
+        Solution for methods namespacing, e.g:
+        $(".product").bem().blockName();
+
+        Does not used for the sake of simplicity, e.g:
+        $(".product").blockName();
+
+        var bemExtension = function () {
+            var $element = this;
+
+            var methods = {
+                blockName: function () {
+                    return "";
+                }
+            };
+
+            return methods;
+        }
+
+        jQuery.fn.extend({ bem: bemExtension });
+    */
 });

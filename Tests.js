@@ -74,7 +74,7 @@ test("elementModifier: Creates element modifier CSS-class with a single modifier
     );
 });
 
-test("getBlock: Gets blocks by block name", function () {
+test("getBlock: Returns blocks by block name", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -96,7 +96,7 @@ test("getBlock: Gets blocks by block name", function () {
     $html.empty();
 });
 
-test("getBlock: Gets blocks by block name and modifier", function () {
+test("getBlock: Returns blocks by block name and modifier", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -117,7 +117,7 @@ test("getBlock: Gets blocks by block name and modifier", function () {
     $html.empty();
 });
 
-test("getBlock: Gets blocks by block name, modifier name and modifier value", function () {
+test("getBlock: Returns blocks by block name, modifier name and modifier value", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -139,7 +139,7 @@ test("getBlock: Gets blocks by block name, modifier name and modifier value", fu
     $html.empty();
 });
 
-test("getBlock: Gets blocks by block name and context", function () {
+test("getBlock: Returns blocks by block name and context", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -165,7 +165,7 @@ test("getBlock: Gets blocks by block name and context", function () {
     $html.empty();
 });
 
-test("getBlock: Gets blocks by block name, modifier and context", function () {
+test("getBlock: Returns blocks by block name, modifier and context", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -190,7 +190,7 @@ test("getBlock: Gets blocks by block name, modifier and context", function () {
     $html.empty();
 });
 
-test("getBlock: Gets blocks by block name, modifier name, modifier value and context", function () {
+test("getBlock: Returns blocks by block name, modifier name, modifier value and context", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
@@ -216,7 +216,7 @@ test("getBlock: Gets blocks by block name, modifier name, modifier value and con
     $html.empty();
 });
 
-test("getElement: Gets elements by block name and element name", function () {
+test("getElement: Returns elements by block name and element name", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -242,7 +242,7 @@ test("getElement: Gets elements by block name and element name", function () {
     $html.empty();
 });
 
-test("getElement: Gets elements by block name, element name and modifier", function () {
+test("getElement: Returns elements by block name, element name and modifier", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -267,7 +267,7 @@ test("getElement: Gets elements by block name, element name and modifier", funct
     $html.empty();
 });
 
-test("getElement: Gets elements by block name, element name, modifier name and modifier value", function () {
+test("getElement: Returns elements by block name, element name, modifier name and modifier value", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -295,7 +295,7 @@ test("getElement: Gets elements by block name, element name, modifier name and m
     $html.empty();
 });
 
-test("getElement: Gets elements by block name, element name and context", function () {
+test("getElement: Returns elements by block name, element name and context", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -329,7 +329,7 @@ test("getElement: Gets elements by block name, element name and context", functi
     $html.empty();
 });
 
-test("getElement: Gets elements by block name, element name, modifier and context", function () {
+test("getElement: Returns elements by block name, element name, modifier and context", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -362,7 +362,7 @@ test("getElement: Gets elements by block name, element name, modifier and contex
     $html.empty();
 });
 
-test("getElement: Gets elements by block name, element name, modifier name, modifier value and context", function () {
+test("getElement: Returns elements by block name, element name, modifier name, modifier value and context", function () {
     // Arrange.
     var html = "\
         <div class='product'>\
@@ -426,7 +426,7 @@ test("splitModifiers: Splits modifiers", function () {
     deepEqual(actualModifiers, expectedModifiers);
 });
 
-test("splitModifiers: Gets only the last modifier from multiple duplicates", function () {
+test("splitModifiers: Returns only the last modifier from multiple duplicates", function () {
     // Arrange.
     var serializedModifiers = "is-selected size_xs is-focused size_m is-selected";
     var expectedModifiers = [
@@ -440,4 +440,46 @@ test("splitModifiers: Gets only the last modifier from multiple duplicates", fun
 
     // Assert.
     deepEqual(actualModifiers, expectedModifiers);
+});
+
+test("$.fn.blockName: Returns the name of the block for the block", function () {
+    // Arrange.
+    var html = "\
+        <div class='product product_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    equal($(".product").blockName(), "product");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.blockName: Returns the name of the block for the element", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name product_name_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    equal($(".product__name").blockName(), "product");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.blockName: Returns an empty string if the DOM-element does have a class", function () {
+    // Arrange.
+    var html = "\
+        <div id='product'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    equal($("#product").blockName(), "");
+
+    // Clean.
+    $html.empty();
 });
