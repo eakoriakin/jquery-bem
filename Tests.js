@@ -5,72 +5,72 @@ $(function () {
 test("block: Creates block CSS-class with modifiers", function () {
     // Act & Assert.
     strictEqual(
-        bem.block("block", "is-enabled is-focused size_xs"),
-        "block block_is-enabled block_is-focused block_size_xs"
+        bem.block("product", "is-selected is-focused size_xs"),
+        "product product_is-selected product_is-focused product_size_xs"
     );
 });
 
 test("block: Creates block CSS-class with modifiers and CSS-classes", function () {
     // Act & Assert.
     strictEqual(
-        bem.block("block", "is-enabled is-focused size_xs", "clearfix"),
-        "block block_is-enabled block_is-focused block_size_xs clearfix"
+        bem.block("product", "is-selected is-focused size_xs", "clearfix"),
+        "product product_is-selected product_is-focused product_size_xs clearfix"
     );
 });
 
 test("blockModifier: Creates block modifier CSS-class with multiple modifiers", function () {
     // Act & Assert.
     strictEqual(
-        bem.blockModifier("block", "is-enabled is-focused size_xs"),
-        "block_is-enabled block_is-focused block_size_xs"
+        bem.blockModifier("product", "is-selected is-focused size_xs"),
+        "product_is-selected product_is-focused product_size_xs"
     );
 });
 
 test("blockModifier: Creates block modifier CSS-class with a single modifier", function () {
     // Act & Assert.
     strictEqual(
-        bem.blockModifier("block", "size", "xs"),
-        "block_size_xs"
+        bem.blockModifier("product", "size", "xs"),
+        "product_size_xs"
     );
 });
 
 test("element: Creates element CSS-class", function () {
     // Act & Assert.
     strictEqual(
-        bem.element("block", "element"),
-        "block__element"
+        bem.element("product", "name"),
+        "product__name"
     );
 });
 
 test("element: Creates element CSS-class with modifiers", function () {
     // Act & Assert.
     strictEqual(
-        bem.element("block", "element", "is-enabled is-focused size_xs"),
-        "block__element block__element_is-enabled block__element_is-focused block__element_size_xs"
+        bem.element("product", "name", "is-selected is-focused size_xs"),
+        "product__name product__name_is-selected product__name_is-focused product__name_size_xs"
     );
 });
 
 test("element: Creates element CSS-class with modifiers and CSS-classes", function () {
     // Act & Assert.
     strictEqual(
-        bem.element("block", "element", "is-enabled is-focused size_xs", "clearfix"),
-        "block__element block__element_is-enabled block__element_is-focused block__element_size_xs clearfix"
+        bem.element("product", "name", "is-selected is-focused size_xs", "clearfix"),
+        "product__name product__name_is-selected product__name_is-focused product__name_size_xs clearfix"
     );
 });
 
 test("elementModifier: Creates element modifier CSS-class with multiple modifiers", function () {
     // Act & Assert.
     strictEqual(
-        bem.elementModifier("block", "element", "is-enabled is-focused size_xs"),
-        "block__element_is-enabled block__element_is-focused block__element_size_xs"
+        bem.elementModifier("product", "name", "is-selected is-focused size_xs"),
+        "product__name_is-selected product__name_is-focused product__name_size_xs"
     );
 });
 
 test("elementModifier: Creates element modifier CSS-class with a single modifier", function () {
     // Act & Assert.
     strictEqual(
-        bem.elementModifier("block", "element", "size", "xs"),
-        "block__element_size_xs"
+        bem.elementModifier("product", "name", "size", "xs"),
+        "product__name_size_xs"
     );
 });
 
@@ -100,7 +100,7 @@ test("getBlock: Gets blocks by block name and modifier", function () {
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
-        <div id='product2' class='product_is-selected'></div>\
+        <div id='product2' class='product product_is-selected'></div>\
     ";
     $html.html(html);
 
@@ -121,8 +121,8 @@ test("getBlock: Gets blocks by block name, modifier name and modifier value", fu
     // Arrange.
     var html = "\
         <div id='product1' class='product'></div>\
-        <div id='product2' class='product_size_xs'></div>\
-        <div id='product3' class='product_size'></div>\
+        <div id='product2' class='product product_size_xs'></div>\
+        <div id='product3' class='product product_size'></div>\
     ";
     $html.html(html);
 
@@ -171,9 +171,9 @@ test("getBlock: Gets blocks by block name, modifier and context", function () {
         <div id='product1' class='product'></div>\
         <div class='products'>\
             <div id='product2' class='product'></div>\
-            <div id='product3' class='product_is-selected'></div>\
+            <div id='product3' class='product product_is-selected'></div>\
         </div>\
-        <div id='product4' class='product'></div>\
+        <div id='product4' class='product product_is-selected'></div>\
     ";
     $html.html(html);
 
@@ -196,10 +196,10 @@ test("getBlock: Gets blocks by block name, modifier name, modifier value and con
         <div id='product1' class='product'></div>\
         <div class='products'>\
             <div id='product2' class='product'></div>\
-            <div id='product3' class='product_size_xs'></div>\
-            <div id='product4' class='product_size'></div>\
+            <div id='product3' class='product product_size_xs'></div>\
+            <div id='product4' class='product product_size'></div>\
         </div>\
-        <div id='product5' class='product'></div>\
+        <div id='product5' class='product product_size_xs'></div>\
     ";
     $html.html(html);
 
@@ -210,6 +210,188 @@ test("getBlock: Gets blocks by block name, modifier name, modifier value and con
     ok(
         $blocks.length === 1 &&
         $blocks[0].id === "product3"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name and element name", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name2' class='product__name'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name");
+
+    // Assert.
+    ok(
+        $elements.length === 2 &&
+        $elements[0].id === "name1" &&
+        $elements[1].id === "name2"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name, element name and modifier", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name2' class='product__name product__name_is-selected'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name", "is-selected");
+
+    // Assert.
+    ok(
+        $elements.length === 1 &&
+        $elements[0].id === "name2"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name, element name, modifier name and modifier value", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name2' class='product__name product__name_size_xs'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name3' class='product__name product__name_size'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name", "size", "xs");
+
+    // Assert.
+    ok(
+        $elements.length === 1 &&
+        $elements[0].id === "name2"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name, element name and context", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='products'>\
+            <div class='product'>\
+                <div id='name2' class='product__name'></div>\
+            </div>\
+            <div class='product'>\
+                <div id='name3' class='product__name'></div>\
+            </div>\
+        </div>\
+        <div class='product'>\
+            <div id='name4' class='product__name'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name", $(".products"));
+
+    // Assert.
+    ok(
+        $elements.length === 2 &&
+        $elements[0].id === "name2" &&
+        $elements[1].id === "name3"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name, element name, modifier and context", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='products'>\
+            <div class='product'>\
+                <div id='name2' class='product__name'></div>\
+            </div>\
+            <div class='product'>\
+                <div id='name3' class='product__name product__name_is-selected'></div>\
+            </div>\
+        </div>\
+        <div class='product'>\
+            <div id='name4' class='product__name product__name_is-selected'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name", "is-selected", $(".products"));
+
+    // Assert.
+    ok(
+        $elements.length === 1 &&
+        $elements[0].id === "name3"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("getElement: Gets elements by block name, element name, modifier name, modifier value and context", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'>\
+            <div id='name1' class='product__name'></div>\
+        </div>\
+        <div class='products'>\
+            <div class='product'>\
+                <div id='name2' class='product__name'></div>\
+            </div>\
+            <div class='product'>\
+                <div id='name3' class='product__name product__name_size_xs'></div>\
+            </div>\
+            <div class='product'>\
+                <div id='name4' class='product__name product__name_size'></div>\
+            </div>\
+        </div>\
+        <div class='product'>\
+            <div id='name5' class='product__name product__name_size_xs'></div>\
+        </div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = bem.getElement("product", "name", "size", "xs", $(".products"));
+
+    // Assert.
+    ok(
+        $elements.length === 1 &&
+        $elements[0].id === "name3"
     );
 
     // Clean.

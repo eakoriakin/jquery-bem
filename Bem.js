@@ -488,6 +488,86 @@
         return $();
     }
 
+    bem.getElement = function () {
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifier" type="String">The modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifierName" type="String">The name of the modifier.</param>
+        /// <param name="modifierValue" type="String">The value of the modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="context" type="Element">A DOM-element or jQuery-object to search in.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifier" type="String">The modifier.</param>
+        /// <param name="context" type="Element">A DOM-element or jQuery-object to search in.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Gets a collection of matched elements.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifierName" type="String">The name of the modifier.</param>
+        /// <param name="modifierValue" type="String">The value of the modifier.</param>
+        /// <param name="context" type="Element">A DOM-element or jQuery-object to search in.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        if (arguments.length === 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
+            return $("." + $.trim(arguments[0]) + bem.elementSeparator + $.trim(arguments[1]));
+        }
+        if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]));
+        }
+        if (arguments.length === 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "string") {
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]));
+        }
+        if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "object") {
+            return $("." + $.trim(arguments[0]) + bem.elementSeparator + $.trim(arguments[1]), arguments[2]);
+        }
+        if (arguments.length === 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "object") {
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]), arguments[3]);
+        }
+        if (arguments.length === 5 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "string" && typeof arguments[4] === "object") {
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]), arguments[4]);
+        }
+
+        return $();
+    }
+
     bem.splitCssClasses = function (cssClasses) {
         /// <summary>
         /// Creates a list of CSS-classes from the string.
@@ -593,11 +673,7 @@
         var $element = this;
 
         var methods = {
-            getElement: function (elementName) {
-                var blockName = $element.attr("class");
 
-                return $("." + blockName + bem.elementSeparator + elementName);
-            }
         };
 
         return methods;
