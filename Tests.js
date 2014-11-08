@@ -511,3 +511,59 @@ test("$.fn.elementName: Returns an empty string if the DOM-element does have a c
     // Clean.
     $html.empty();
 });
+
+test("$.fn.isBlock: Returns true if the jQuery-object is a block", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok($(".product").isBlock());
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.isBlock: Returns false if the jQuery-object is not a block", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok(!$(".product__name").isBlock());
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.isElement: Returns true if the jQuery-object is an element", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok($(".product__name").isElement());
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.isElement: Returns false if the jQuery-object is not an element", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok(!$(".product").isElement());
+
+    // Clean.
+    $html.empty();
+});

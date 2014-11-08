@@ -671,7 +671,7 @@
     // jQuery-extensions.
     $.fn.blockName = function () {
         /// <summary>
-        /// Returns the name of the block of the first block or element in the set of jQuery-elements.
+        /// Returns the name of the block of the first block or element in the set of jQuery-objects.
         /// <para>The name of the block is taken from the first CSS-class.</para>
         /// </summary>
         /// <returns type="String">The name of the block.</returns>
@@ -688,7 +688,7 @@
 
     $.fn.elementName = function () {
         /// <summary>
-        /// Returns the name of the element of the first element in the set of jQuery-elements.
+        /// Returns the name of the element of the first element in the set of jQuery-objects.
         /// <para>The name of the element is taken from the first CSS-class.</para>
         /// </summary>
         /// <returns type="String">The name of the element.</returns>
@@ -701,6 +701,36 @@
 
         return "";
     }
+
+    $.fn.isBlock = function () {
+        /// <summary>
+        /// Determines whether the first jQuery-object in the set of jQuery-objects is a block.
+        /// </summary>
+        /// <returns type="Boolean">True if the first jQuery-object is a block; otherwise - false.</returns>
+        var cssClass = this.eq(0).attr("class"),
+            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+        if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) === -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    $.fn.isElement = function () {
+        /// <summary>
+        /// Determines whether the first jQuery-object in the set of jQuery-objects is an element.
+        /// </summary>
+        /// <returns type="Boolean">True if the first jQuery-object is an element; otherwise - false.</returns>
+        var cssClass = this.first().attr("class"),
+            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+        if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) != -1) {
+            return true;
+        }
+
+        return false;
+    };
 
     /*
         Solution for methods namespacing, e.g:
