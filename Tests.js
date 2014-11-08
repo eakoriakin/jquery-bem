@@ -79,6 +79,7 @@ test("getBlock: Returns blocks by block name", function () {
     var html = "\
         <div id='product1' class='product'></div>\
         <div id='product2' class='product'></div>\
+        <div class='offer'></div>\
     ";
     $html.html(html);
 
@@ -101,6 +102,7 @@ test("getBlock: Returns blocks by block name and modifier", function () {
     var html = "\
         <div id='product1' class='product'></div>\
         <div id='product2' class='product product_is-selected'></div>\
+        <div class='offer'></div>\
     ";
     $html.html(html);
 
@@ -123,6 +125,7 @@ test("getBlock: Returns blocks by block name, modifier name and modifier value",
         <div id='product1' class='product'></div>\
         <div id='product2' class='product product_size_xs'></div>\
         <div id='product3' class='product product_size'></div>\
+        <div class='offer'></div>\
     ";
     $html.html(html);
 
@@ -146,6 +149,7 @@ test("getBlock: Returns blocks by block name and context", function () {
         <div class='products'>\
             <div id='product2' class='product'></div>\
             <div id='product3' class='product'></div>\
+            <div class='offer'></div>\
         </div>\
         <div id='product4' class='product'></div>\
     ";
@@ -172,6 +176,7 @@ test("getBlock: Returns blocks by block name, modifier and context", function ()
         <div class='products'>\
             <div id='product2' class='product'></div>\
             <div id='product3' class='product product_is-selected'></div>\
+            <div class='offer'></div>\
         </div>\
         <div id='product4' class='product product_is-selected'></div>\
     ";
@@ -198,6 +203,7 @@ test("getBlock: Returns blocks by block name, modifier name, modifier value and 
             <div id='product2' class='product'></div>\
             <div id='product3' class='product product_size_xs'></div>\
             <div id='product4' class='product product_size'></div>\
+            <div class='offer'></div>\
         </div>\
         <div id='product5' class='product product_size_xs'></div>\
     ";
@@ -221,9 +227,11 @@ test("getElement: Returns elements by block name and element name", function () 
     var html = "\
         <div class='product'>\
             <div id='name1' class='product__name'></div>\
+            <div class='product__price'></div>\
         </div>\
         <div class='product'>\
             <div id='name2' class='product__name'></div>\
+            <div class='product__price'></div>\
         </div>\
     ";
     $html.html(html);
@@ -250,6 +258,7 @@ test("getElement: Returns elements by block name, element name and modifier", fu
         </div>\
         <div class='product'>\
             <div id='name2' class='product__name product__name_is-selected'></div>\
+            <div class='product__price'></div>\
         </div>\
     ";
     $html.html(html);
@@ -278,6 +287,7 @@ test("getElement: Returns elements by block name, element name, modifier name an
         </div>\
         <div class='product'>\
             <div id='name3' class='product__name product__name_size'></div>\
+            <div class='product__price'></div>\
         </div>\
     ";
     $html.html(html);
@@ -307,6 +317,7 @@ test("getElement: Returns elements by block name, element name and context", fun
             </div>\
             <div class='product'>\
                 <div id='name3' class='product__name'></div>\
+                <div class='product__price'></div>\
             </div>\
         </div>\
         <div class='product'>\
@@ -341,6 +352,7 @@ test("getElement: Returns elements by block name, element name, modifier and con
             </div>\
             <div class='product'>\
                 <div id='name3' class='product__name product__name_is-selected'></div>\
+                <div class='product__price'></div>\
             </div>\
         </div>\
         <div class='product'>\
@@ -507,6 +519,192 @@ test("$.fn.elementName: Returns an empty string if the DOM-element does have a c
 
     // Act & Assert.
     equal($("#product").elementName(), "");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getBlock: Returns blocks by block name", function () {
+    // Arrange.
+    var html = "\
+        <div id='product1' class='product'></div>\
+        <div class='products'>\
+            <div id='product2' class='product'></div>\
+            <div id='product3' class='product'></div>\
+            <div class='offer'></div>\
+        </div>\
+        <div class='products'>\
+            <div id='product4' class='product'></div>\
+        </div>\
+        <div id='product5' class='product'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $blocks = $(".products").getBlock("product");
+
+    // Assert.
+    ok(
+        $blocks.length === 3 &&
+        $blocks[0].id === "product2" &&
+        $blocks[1].id === "product3" &&
+        $blocks[2].id === "product4"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getBlock: Returns blocks by block name and modifier", function () {
+    // Arrange.
+    var html = "\
+        <div id='product1' class='product'></div>\
+        <div class='products'>\
+            <div id='product2' class='product'></div>\
+            <div id='product3' class='product product_is-selected'></div>\
+            <div class='offer'></div>\
+        </div>\
+        <div class='products'>\
+            <div id='product4' class='product product_is-selected'></div>\
+        </div>\
+        <div id='product5' class='product product_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $blocks = $(".products").getBlock("product", "is-selected");
+
+    // Assert.
+    ok(
+        $blocks.length === 2 &&
+        $blocks[0].id === "product3" &&
+        $blocks[1].id === "product4"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getBlock: Returns blocks by block name, modifier name and modifier value", function () {
+    // Arrange.
+    var html = "\
+        <div id='product1' class='product'></div>\
+        <div class='products'>\
+            <div id='product2' class='product'></div>\
+            <div id='product3' class='product product_size_xs'></div>\
+            <div id='product4' class='product product_size'></div>\
+            <div class='offer'></div>\
+        </div>\
+        <div class='products'>\
+            <div id='product5' class='product product_size_xs'></div>\
+        </div>\
+        <div id='product6' class='product product_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $blocks = $(".products").getBlock("product", "size", "xs");
+
+    // Assert.
+    ok(
+        $blocks.length === 2 &&
+        $blocks[0].id === "product3" &&
+        $blocks[1].id === "product5"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getElement: Returns elements by element name", function () {
+    // Arrange.
+    var html = "\
+        <div id='name1' class='product__name'></div>\
+        <div class='product'>\
+            <div id='name2' class='product__name'></div>\
+            <div class='product__price'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name3' class='product__name'></div>\
+        </div>\
+        <div id='name4' class='product__name'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = $(".product").getElement("name");
+
+    // Assert.
+    ok(
+        $elements.length === 2 &&
+        $elements[0].id === "name2" &&
+        $elements[1].id === "name3"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getElement: Returns elements by element name and modifier", function () {
+    // Arrange.
+    var html = "\
+        <div id='name1' class='product__name'></div>\
+        <div class='product'>\
+            <div id='name2' class='product__name'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name3' class='product__name product__name_is-selected'></div>\
+            <div class='product__price'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name4' class='product__name product__name_is-selected'></div>\
+        </div>\
+        <div id='name5' class='product__name product__name_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = $(".product").getElement("name", "is-selected");
+
+    // Assert.
+    ok(
+        $elements.length === 2 &&
+        $elements[0].id === "name3" &&
+        $elements[1].id === "name4"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.getElement: Returns elements by element name, modifier name and modifier value", function () {
+    // Arrange.
+    var html = "\
+        <div id='name1' class='product__name'></div>\
+        <div class='product'>\
+            <div id='name2' class='product__name'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name3' class='product__name product__name_size_xs'></div>\
+            <div class='product__price'></div>\
+        </div>\
+        <div class='product'>\
+            <div id='name4' class='product__name product__name_size_xs'></div>\
+            <div id='name5' class='product__name product__name_size'></div>\
+        </div>\
+        <div id='name6' class='product__name product__name_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $elements = $(".product").getElement("name", "size", "xs");
+
+    // Assert.
+    ok(
+        $elements.length === 2 &&
+        $elements[0].id === "name3" &&
+        $elements[1].id === "name4"
+    );
 
     // Clean.
     $html.empty();

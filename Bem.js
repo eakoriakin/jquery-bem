@@ -671,7 +671,7 @@
     // jQuery-extensions.
     $.fn.blockName = function () {
         /// <summary>
-        /// Returns the name of the block of the first block or element in the set of jQuery-objects.
+        /// Returns the name of the first block in the set of jQuery-objects.
         /// <para>The name of the block is taken from the first CSS-class.</para>
         /// </summary>
         /// <returns type="String">The name of the block.</returns>
@@ -688,7 +688,7 @@
 
     $.fn.elementName = function () {
         /// <summary>
-        /// Returns the name of the element of the first element in the set of jQuery-objects.
+        /// Returns the name of the first element in the set of jQuery-objects.
         /// <para>The name of the element is taken from the first CSS-class.</para>
         /// </summary>
         /// <returns type="String">The name of the element.</returns>
@@ -700,6 +700,65 @@
         }
 
         return "";
+    }
+
+    $.fn.getBlock = function () {
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="modifier" type="String">The modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+        /// </summary>
+        /// <param name="blockName" type="String">The name of the block.</param>
+        /// <param name="modifierName" type="String">The name of the modifier.</param>
+        /// <param name="modifierValue" type="String">The value of the modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        return bem.getBlock.apply(null, Array.prototype.slice.call(arguments).concat([this]));
+    }
+
+    $.fn.getElement = function () {
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+        /// </summary>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+        /// </summary>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifier" type="String">The modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        /// <signature>
+        /// <summary>
+        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+        /// </summary>
+        /// <param name="elementName" type="String">The name of the element.</param>
+        /// <param name="modifierName" type="String">The name of the modifier.</param>
+        /// <param name="modifierValue" type="String">The value of the modifier.</param>
+        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// </signature>
+        return bem.getElement.apply(null, [this.blockName()].concat(Array.prototype.slice.call(arguments), [this]));
     }
 
     $.fn.isBlock = function () {
@@ -730,7 +789,7 @@
         }
 
         return false;
-    };
+    }
 
     /*
         Solution for methods namespacing, e.g:
