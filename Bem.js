@@ -669,127 +669,171 @@
     }
 
     // jQuery-extensions.
-    $.fn.blockName = function () {
-        /// <summary>
-        /// Returns the name of the first block in the set of jQuery-objects.
-        /// <para>The name of the block is taken from the first CSS-class.</para>
-        /// </summary>
-        /// <returns type="String">The name of the block.</returns>
-        var cssClass = this.eq(0).attr("class"),
-            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+    jQuery.fn.extend({
 
-        if (firstCssClass) {
-            // Splitting in case if the current jQuery-object is an element.
-            return firstCssClass.split(bem.elementSeparator)[0];
+        addModifier: function () {
+            /// <signature>
+            /// <summary>
+            /// Adds the modifier(s) to each block or element of the set of jQuery-objects.
+            /// </summary>
+            /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Adds the modifier to each block or element of the set of jQuery-objects.
+            /// </summary>
+            /// <param name="modifierName" type="String">The name of the modifier.</param>
+            /// <param name="modifierValue" type="String">The value of the modifier.</param>
+            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Adds the modifier(s) to each block or element of the set of jQuery-objects.
+            /// </summary>
+            /// <param name="modifiers" type="Array">A list of modifiers.</param>
+            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// </signature>
+            for (var i = 0; i < this.length; i++) {
+                var $element = $(this[i]);
+
+                if ($element.isBlock()) {
+                    $element.addClass(
+                        bem.blockModifier.apply(null, [$element.blockName()].concat(Array.prototype.slice.call(arguments)))
+                    );
+                }
+                else if ($element.isElement()) {
+                    $element.addClass(
+                        bem.elementModifier.apply(null, [$element.blockName(), $element.elementName()].concat(Array.prototype.slice.call(arguments)))
+                    );
+                }
+            }
+
+            return this;
+        },
+
+        blockName: function () {
+            /// <summary>
+            /// Returns the name of the first block of the set of jQuery-objects.
+            /// <para>The name of the block is taken from the first CSS-class.</para>
+            /// </summary>
+            /// <returns type="String">The name of the block.</returns>
+            var cssClass = this.eq(0).attr("class"),
+                firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+            if (firstCssClass) {
+                // Splitting in case if the current jQuery-object is an element.
+                return firstCssClass.split(bem.elementSeparator)[0];
+            }
+
+            return "";
+        },
+
+        elementName: function () {
+            /// <summary>
+            /// Returns the name of the first element of the set of jQuery-objects.
+            /// <para>The name of the element is taken from the first CSS-class.</para>
+            /// </summary>
+            /// <returns type="String">The name of the element.</returns>
+            var cssClass = this.eq(0).attr("class"),
+                firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+            if (firstCssClass) {
+                return firstCssClass.split(bem.elementSeparator)[1];
+            }
+
+            return "";
+        },
+
+        getBlock: function () {
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+            /// </summary>
+            /// <param name="blockName" type="String">The name of the block.</param>
+            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+            /// </summary>
+            /// <param name="blockName" type="String">The name of the block.</param>
+            /// <param name="modifier" type="String">The modifier.</param>
+            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
+            /// </summary>
+            /// <param name="blockName" type="String">The name of the block.</param>
+            /// <param name="modifierName" type="String">The name of the modifier.</param>
+            /// <param name="modifierValue" type="String">The value of the modifier.</param>
+            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            return bem.getBlock.apply(null, Array.prototype.slice.call(arguments).concat([this]));
+        },
+
+        getElement: function () {
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+            /// </summary>
+            /// <param name="elementName" type="String">The name of the element.</param>
+            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+            /// </summary>
+            /// <param name="elementName" type="String">The name of the element.</param>
+            /// <param name="modifier" type="String">The modifier.</param>
+            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
+            /// </summary>
+            /// <param name="elementName" type="String">The name of the element.</param>
+            /// <param name="modifierName" type="String">The name of the modifier.</param>
+            /// <param name="modifierValue" type="String">The value of the modifier.</param>
+            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// </signature>
+            return bem.getElement.apply(null, [this.blockName()].concat(Array.prototype.slice.call(arguments), [this]));
+        },
+
+        isBlock: function () {
+            /// <summary>
+            /// Determines whether the first jQuery-object of the set of jQuery-objects is a block.
+            /// </summary>
+            /// <returns type="Boolean">True if the first jQuery-object is a block; otherwise - false.</returns>
+            var cssClass = this.eq(0).attr("class"),
+                firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+            if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) === -1) {
+                return true;
+            }
+
+            return false;
+        },
+
+        isElement: function () {
+            /// <summary>
+            /// Determines whether the first jQuery-object of the set of jQuery-objects is an element.
+            /// </summary>
+            /// <returns type="Boolean">True if the first jQuery-object is an element; otherwise - false.</returns>
+            var cssClass = this.first().attr("class"),
+                firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
+
+            if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) != -1) {
+                return true;
+            }
+
+            return false;
         }
-
-        return "";
-    }
-
-    $.fn.elementName = function () {
-        /// <summary>
-        /// Returns the name of the first element in the set of jQuery-objects.
-        /// <para>The name of the element is taken from the first CSS-class.</para>
-        /// </summary>
-        /// <returns type="String">The name of the element.</returns>
-        var cssClass = this.eq(0).attr("class"),
-            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
-
-        if (firstCssClass) {
-            return firstCssClass.split(bem.elementSeparator)[1];
-        }
-
-        return "";
-    }
-
-    $.fn.getBlock = function () {
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
-        /// </summary>
-        /// <param name="blockName" type="String">The name of the block.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
-        /// </summary>
-        /// <param name="blockName" type="String">The name of the block.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched blocks, containing in the currunt set of jQuery-objects.
-        /// </summary>
-        /// <param name="blockName" type="String">The name of the block.</param>
-        /// <param name="modifierName" type="String">The name of the modifier.</param>
-        /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        return bem.getBlock.apply(null, Array.prototype.slice.call(arguments).concat([this]));
-    }
-
-    $.fn.getElement = function () {
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
-        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
-        /// </summary>
-        /// <param name="elementName" type="String">The name of the element.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
-        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
-        /// </summary>
-        /// <param name="elementName" type="String">The name of the element.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        /// <signature>
-        /// <summary>
-        /// Returns a collection of matched elements, containing in the currunt set of jQuery-objects.
-        /// <para>The name of the block for the element is taken each time from the jQuery-object in the currunt set of jQuery-objects.</para>
-        /// </summary>
-        /// <param name="elementName" type="String">The name of the element.</param>
-        /// <param name="modifierName" type="String">The name of the modifier.</param>
-        /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
-        /// </signature>
-        return bem.getElement.apply(null, [this.blockName()].concat(Array.prototype.slice.call(arguments), [this]));
-    }
-
-    $.fn.isBlock = function () {
-        /// <summary>
-        /// Determines whether the first jQuery-object in the set of jQuery-objects is a block.
-        /// </summary>
-        /// <returns type="Boolean">True if the first jQuery-object is a block; otherwise - false.</returns>
-        var cssClass = this.eq(0).attr("class"),
-            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
-
-        if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) === -1) {
-            return true;
-        }
-
-        return false;
-    }
-
-    $.fn.isElement = function () {
-        /// <summary>
-        /// Determines whether the first jQuery-object in the set of jQuery-objects is an element.
-        /// </summary>
-        /// <returns type="Boolean">True if the first jQuery-object is an element; otherwise - false.</returns>
-        var cssClass = this.first().attr("class"),
-            firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
-
-        if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) != -1) {
-            return true;
-        }
-
-        return false;
-    }
+    });
 
     /*
         Solution for methods namespacing, e.g:
