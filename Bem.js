@@ -1,4 +1,17 @@
-﻿$(function () {
+﻿/*!
+ * BEM-library for JavaScript and jQuery v1.0.0.
+ * http://kea.eqwad.com/bem-for-js
+ *
+ * Copyright (c) 2014 Evgeny A. Koryakin.
+ * Released under the MIT license.
+ * https://github.com/eakoryakin/BemForJS/blob/master/LICENSE
+ *
+ * Date: 2014-11-11T18:05Z
+ * 
+ * Dependencies:
+ *  - jQuery v1.4.0
+ */
+$(function () {
     var bem = {};
     window.bem = bem;
 
@@ -865,7 +878,7 @@
             /// Determines whether the first jQuery-object of the set of jQuery-objects is an element.
             /// </summary>
             /// <returns type="Boolean">True if the first jQuery-object is an element; otherwise - false.</returns>
-            var cssClass = this.first().attr("class"),
+            var cssClass = this.eq(0).attr("class"),
                 firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
 
             if (firstCssClass && firstCssClass.indexOf(bem.elementSeparator) != -1) {

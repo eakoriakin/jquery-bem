@@ -1178,6 +1178,8 @@ test("$.fn.hasModifier: Returns true if any of the set of blocks has the given m
     ";
     $html.html(html);
 
+    console.log($html);
+
     // Act & Assert.
     ok($(".product").hasModifier("is-selected is-focused size_xs"));
 
