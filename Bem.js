@@ -677,7 +677,7 @@
             /// Adds the modifier(s) to each block or element of the set of jQuery-objects.
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
@@ -685,14 +685,14 @@
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
             /// Adds the modifier(s) to each block or element of the set of jQuery-objects.
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);
@@ -810,7 +810,7 @@
             /// Determines whether any of the set of jQuery-objects has the given modifier.
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
@@ -818,14 +818,14 @@
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
             /// Determines whether any of the set of jQuery-objects has the given modifier.
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);
@@ -875,13 +875,61 @@
             return false;
         },
 
+        modifierValue: function (modifierName, modifierValue) {
+            /// <signature>
+            /// <summary>
+            /// Returns the value of the modifier of the first block or element of the set of jQuery-objects.
+            /// </summary>
+            /// <param name="modifierName" type="String">The name of the modifier.</param>
+            /// <returns type="String">The value of the modifier.</returns>
+            /// </signature>
+            /// <signature>
+            /// <summary>
+            /// Sets the value of the modifier of each block or element of the set of jQuery-objects.
+            /// </summary>
+            /// <param name="modifierName">The name of the modifier.</param>
+            /// <param name="modifierValue">The value of the modifier.</param>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
+            /// </signature>
+            if (arguments.length === 1) {
+                var cssClass = this.attr("class");
+
+                if (!modifierName || !cssClass) {
+                    return "";
+                }
+
+                var matches = new RegExp(bem.modifierSeparator + modifierName + bem.modifierValueSeparator + "([a-z0-9-]+)", "ig").exec(cssClass);
+
+                return matches ? matches[1] : "";
+            }
+            if (arguments.length === 2) {
+                var cssClass = this.attr("class");
+
+                if (!modifierName || !modifierValue || !cssClass) {
+                    return this;
+                }
+
+                this.attr(
+                    "class",
+                    cssClass.replace(
+                        new RegExp(bem.modifierSeparator + modifierName + bem.modifierValueSeparator + "([a-z0-9-]+)", "ig"),
+                        function () {
+                            return bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
+                        }
+                    )
+                );
+
+                return this;
+            }
+        },
+
         removeModifier: function () {
             /// <signature>
             /// <summary>
             /// Removes the modifier(s) from each block or element of the set of jQuery-objects.
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
@@ -889,14 +937,14 @@
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
             /// Removes the modifier(s) from each block or element of the set of jQuery-objects.
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
+            /// <returns type="jQuery-object">The set of jQuery-objects.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);

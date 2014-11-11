@@ -972,156 +972,108 @@ test("$.fn.isElement: Returns false if the jQuery-object does not have a CSS-cla
     $html.empty();
 });
 
-test("$.fn.removeModifier: Removes a modifier, consisting of multiple modifiers, from a set of blocks", function () {
-    // Arrange.
-    var html = "\
-        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
-        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
-    ";
-    $html.html(html);
-
-    // Act.
-    var $products = $(".product").removeModifier("is-selected is-focused size_xs");
-
-    // Assert.
-    ok($products.eq(0).attr("class") === "product");
-    ok($products.eq(1).attr("class") === "product");
-
-    // Clean.
-    $html.empty();
-});
-
-test("$.fn.removeModifier: Removes a modifier, consisting of modifier with name and value, from a set of blocks", function () {
+test("$.fn.modifierValue: Returns the value of the modifier of the block", function () {
     // Arrange.
     var html = "\
         <div class='product product_size_xs'></div>\
-        <div class='product product_size_xs'></div>\
+        <div class='product'></div>\
     ";
     $html.html(html);
 
-    // Act.
-    var $products = $(".product").removeModifier("size", "xs");
-
-    // Assert.
-    ok($products.eq(0).attr("class") === "product");
-    ok($products.eq(1).attr("class") === "product");
+    // Act & Assert.
+    ok($(".product").modifierValue("size") === "xs");
 
     // Clean.
     $html.empty();
 });
 
-test("$.fn.removeModifier: Removes a modifier, consisting of a list of modifiers, from a set of blocks", function () {
-    // Arrange.
-    var html = "\
-        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
-        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
-    ";
-    $html.html(html);
-
-    // Act.
-    var $products = $(".product").removeModifier([{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]);
-
-    // Assert.
-    ok($products.eq(0).attr("class") === "product");
-    ok($products.eq(1).attr("class") === "product");
-
-    // Clean.
-    $html.empty();
-});
-
-test("$.fn.removeModifier: Removes a modifier, consisting of multiple modifiers, from a set of elements", function () {
-    // Arrange.
-    var html = "\
-        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
-        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
-    ";
-    $html.html(html);
-
-    // Act.
-    var $names = $(".product__name").removeModifier("is-selected is-focused size_xs");
-
-    // Assert.
-    ok($names.eq(0).attr("class") === "product__name");
-    ok($names.eq(1).attr("class") === "product__name");
-
-    // Clean.
-    $html.empty();
-});
-
-test("$.fn.removeModifier: Removes a modifier, consisting of modifier with name and value, from a set of elements", function () {
+test("$.fn.modifierValue: Returns the value of the modifier of the element", function () {
     // Arrange.
     var html = "\
         <div class='product__name product__name_size_xs'></div>\
+        <div class='product__name'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok($(".product__name").modifierValue("size") === "xs");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.modifierValue: Returns an empty string if the block does not have the modifier", function () {
+    // Arrange.
+    var html = "\
+        <div class='product'></div>\
+        <div class='product product__name_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act & Assert.
+    ok($(".product").modifierValue("size") === "");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.modifierValue: Returns an empty string if the element does not have the modifier", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name'></div>\
         <div class='product__name product__name_size_xs'></div>\
     ";
     $html.html(html);
 
-    // Act.
-    var $names = $(".product__name").removeModifier("size", "xs");
-
-    // Assert.
-    ok($names.eq(0).attr("class") === "product__name");
-    ok($names.eq(1).attr("class") === "product__name");
+    // Act & Assert.
+    ok($(".product__name").modifierValue("size") === "");
 
     // Clean.
     $html.empty();
 });
 
-test("$.fn.removeModifier: Removes a modifier, consisting of a list of modifiers, from a set of elements", function () {
+test("$.fn.modifierValue: Sets the value of the modifier of blocks and retains chaining", function () {
     // Arrange.
     var html = "\
-        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
-        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
+        <div id='product1' class='product product_size_xs'></div>\
+        <div id='product2' class='product product_size_xs'></div>\
     ";
     $html.html(html);
 
     // Act.
-    var $names = $(".product__name").removeModifier([{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]);
-
-    // Assert.
-    ok($names.eq(0).attr("class") === "product__name");
-    ok($names.eq(1).attr("class") === "product__name");
-
-    // Clean.
-    $html.empty();
-});
-
-test("$.fn.removeModifier: Retains chaining", function () {
-    // Arrange.
-    var html = "\
-        <div id='product1' class='product product_is-selected'></div>\
-        <div id='product2' class='product product_is-selected'></div>\
-    ";
-    $html.html(html);
-
-    // Act.
-    var $products = $(".product").removeModifier("is-selected");
+    var $products = $(".product").modifierValue("size", "m");
 
     // Assert.
     ok(
         $products.length === 2 &&
         $products[0].id === "product1" &&
-        $products[1].id === "product2"
+        $products[1].id === "product2" &&
+        $products.eq(0).attr("class") === "product product_size_m" &&
+        $products.eq(1).attr("class") === "product product_size_m"
     );
 
     // Clean.
     $html.empty();
 });
 
-test("$.fn.removeModifier: Retains other classes", function () {
+test("$.fn.modifierValue: Sets the value of the modifier of elements and retains chaining", function () {
     // Arrange.
     var html = "\
-        <div class='product product_is-selected clearfix'></div>\
+        <div id='name1' class='product_name product_name_size_xs'></div>\
+        <div id='name2' class='product_name product_name_size_xs'></div>\
     ";
     $html.html(html);
 
     // Act.
-    var $products = $(".product").removeModifier("is-selected");
+    var $products = $(".product_name").modifierValue("size", "m");
 
     // Assert.
     ok(
-        $products.length === 1 &&
-        $products.eq(0).attr("class") === "product clearfix"
+        $products.length === 2 &&
+        $products[0].id === "name1" &&
+        $products[1].id === "name2" &&
+        $products.eq(0).attr("class") === "product_name product_name_size_m" &&
+        $products.eq(1).attr("class") === "product_name product_name_size_m"
     );
 
     // Clean.
@@ -1303,6 +1255,162 @@ test("$.fn.hasModifier: Returns true if any of the set of elements has the given
 
     // Act & Assert.
     ok($(".product__name").hasModifier([{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]));
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of multiple modifiers, from a set of blocks", function () {
+    // Arrange.
+    var html = "\
+        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
+        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $products = $(".product").removeModifier("is-selected is-focused size_xs");
+
+    // Assert.
+    ok($products.eq(0).attr("class") === "product");
+    ok($products.eq(1).attr("class") === "product");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of modifier with name and value, from a set of blocks", function () {
+    // Arrange.
+    var html = "\
+        <div class='product product_size_xs'></div>\
+        <div class='product product_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $products = $(".product").removeModifier("size", "xs");
+
+    // Assert.
+    ok($products.eq(0).attr("class") === "product");
+    ok($products.eq(1).attr("class") === "product");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of a list of modifiers, from a set of blocks", function () {
+    // Arrange.
+    var html = "\
+        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
+        <div class='product product_is-selected product_is-focused product_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $products = $(".product").removeModifier([{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]);
+
+    // Assert.
+    ok($products.eq(0).attr("class") === "product");
+    ok($products.eq(1).attr("class") === "product");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of multiple modifiers, from a set of elements", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
+        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $names = $(".product__name").removeModifier("is-selected is-focused size_xs");
+
+    // Assert.
+    ok($names.eq(0).attr("class") === "product__name");
+    ok($names.eq(1).attr("class") === "product__name");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of modifier with name and value, from a set of elements", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name product__name_size_xs'></div>\
+        <div class='product__name product__name_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $names = $(".product__name").removeModifier("size", "xs");
+
+    // Assert.
+    ok($names.eq(0).attr("class") === "product__name");
+    ok($names.eq(1).attr("class") === "product__name");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Removes a modifier, consisting of a list of modifiers, from a set of elements", function () {
+    // Arrange.
+    var html = "\
+        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
+        <div class='product__name product__name_is-selected product__name_is-focused product__name_size_xs'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $names = $(".product__name").removeModifier([{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]);
+
+    // Assert.
+    ok($names.eq(0).attr("class") === "product__name");
+    ok($names.eq(1).attr("class") === "product__name");
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Retains chaining", function () {
+    // Arrange.
+    var html = "\
+        <div id='product1' class='product product_is-selected'></div>\
+        <div id='product2' class='product product_is-selected'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $products = $(".product").removeModifier("is-selected");
+
+    // Assert.
+    ok(
+        $products.length === 2 &&
+        $products[0].id === "product1" &&
+        $products[1].id === "product2"
+    );
+
+    // Clean.
+    $html.empty();
+});
+
+test("$.fn.removeModifier: Retains other classes", function () {
+    // Arrange.
+    var html = "\
+        <div class='product product_is-selected clearfix'></div>\
+    ";
+    $html.html(html);
+
+    // Act.
+    var $products = $(".product").removeModifier("is-selected");
+
+    // Assert.
+    ok(
+        $products.length === 1 &&
+        $products.eq(0).attr("class") === "product clearfix"
+    );
 
     // Clean.
     $html.empty();
