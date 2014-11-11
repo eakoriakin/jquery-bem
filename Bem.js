@@ -804,47 +804,6 @@
             return bem.getElement.apply(null, [this.blockName()].concat(Array.prototype.slice.call(arguments), [this]));
         },
 
-        hasModifier: function () {
-            /// <signature>
-            /// <summary>
-            /// Determines whether any of the set of jQuery-objects has the given modifier.
-            /// </summary>
-            /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
-            /// </signature>
-            /// <signature>
-            /// <summary>
-            /// Determines whether any of the set of jQuery-objects has the given modifier.
-            /// </summary>
-            /// <param name="modifierName" type="String">The name of the modifier.</param>
-            /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
-            /// </signature>
-            /// <signature>
-            /// <summary>
-            /// Determines whether any of the set of jQuery-objects has the given modifier.
-            /// </summary>
-            /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="String">True if any of the set of jQuery-objects has the given modifier; otherwise - false.</returns>
-            /// </signature>
-            for (var i = 0; i < this.length; i++) {
-                var $element = $(this[i]);
-
-                if ($element.isBlock()) {
-                    if ($element.hasClass(bem.blockModifier.apply(null, [$element.blockName()].concat(Array.prototype.slice.call(arguments))))) {
-                        return true;
-                    }
-                }
-                else if ($element.isElement()) {
-                    if ($element.hasClass(bem.elementModifier.apply(null, [$element.blockName(), $element.elementName()].concat(Array.prototype.slice.call(arguments))))) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        },
-
         isBlock: function () {
             /// <summary>
             /// Determines whether the first jQuery-object of the set of jQuery-objects is a block.
@@ -873,49 +832,7 @@
             }
 
             return false;
-        },
-
-        removeModifier: function () {
-            /// <signature>
-            /// <summary>
-            /// Removes the modifier(s) from each block or element of the set of jQuery-objects.
-            /// </summary>
-            /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
-            /// </signature>
-            /// <signature>
-            /// <summary>
-            /// Removes the modifier from each block or element of the set of jQuery-objects.
-            /// </summary>
-            /// <param name="modifierName" type="String">The name of the modifier.</param>
-            /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
-            /// </signature>
-            /// <signature>
-            /// <summary>
-            /// Removes the modifier(s) from each block or element of the set of jQuery-objects.
-            /// </summary>
-            /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="String">The set of jQuery-objects.</returns>
-            /// </signature>
-            for (var i = 0; i < this.length; i++) {
-                var $element = $(this[i]);
-
-                if ($element.isBlock()) {
-                    $element.removeClass(
-                        bem.blockModifier.apply(null, [$element.blockName()].concat(Array.prototype.slice.call(arguments)))
-                    );
-                }
-                else if ($element.isElement()) {
-                    $element.removeClass(
-                        bem.elementModifier.apply(null, [$element.blockName(), $element.elementName()].concat(Array.prototype.slice.call(arguments)))
-                    );
-                }
-            }
-
-            return this;
         }
-
     });
 
     /*
