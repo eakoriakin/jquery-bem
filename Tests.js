@@ -426,6 +426,18 @@ test("getElement: Returns elements by block name, element name, modifier name, m
     $html.empty();
 });
 
+test("splitCssClasses: Ignores extra spaces", function () {
+    // Arrange.
+    var serializedCssClasses = "  h1     h2  h3 ";
+    var expectedCssClasses = ["h1", "h2", "h3"]
+
+    // Act.
+    var actualCssClasses = bem.splitCssClasses(serializedCssClasses);
+
+    // Assert.
+    deepEqual(actualCssClasses, expectedCssClasses);
+});
+
 test("splitCssClasses: Splits CSS-classes and removes duplicates", function () {
     // Arrange.
     var serializedCssClasses = "h3 h1 h2 h1 h3";
@@ -436,6 +448,22 @@ test("splitCssClasses: Splits CSS-classes and removes duplicates", function () {
 
     // Assert.
     deepEqual(actualCssClasses, expectedCssClasses);
+});
+
+test("splitModifiers: Ignores extra spaces", function () {
+    // Arrange.
+    var serializedModifiers = " is-selected   size_xs     is-focused  ";
+    var expectedModifiers = [
+        { name: "is-selected", value: "" },
+        { name: "size", value: "xs" },
+        { name: "is-focused", value: "" }
+    ];
+
+    // Act.
+    var actualModifiers = bem.splitModifiers(serializedModifiers);
+
+    // Assert.
+    deepEqual(actualModifiers, expectedModifiers);
 });
 
 test("splitModifiers: Splits modifiers", function () {

@@ -1,4 +1,4 @@
 Bem.JS
 ========
 
-BEM-library for JavaScript and jQuery
+BEM library for JavaScript and jQuery
