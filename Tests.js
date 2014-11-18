@@ -18,6 +18,22 @@ test("block: Creates a CSS-class of the block with modifiers and CSS-classes", f
     );
 });
 
+test("block: Creates a CSS-class of the block with a list of modifiers", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.block("product", [{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }]),
+        "product product_is-selected product_is-focused product_size_xs"
+    );
+});
+
+test("block: Creates a CSS-class of the block with a list of modifiers and a list of CSS-classes", function () {
+    // Act & Assert.
+    strictEqual(
+        bem.block("product", [{ name: "is-selected" }, { name: "is-focused" }, { name: "size", value: "xs" }], ["clearfix"]),
+        "product product_is-selected product_is-focused product_size_xs clearfix"
+    );
+});
+
 test("blockModifier: Creates a CSS-class of the block's modifier with multiple modifiers", function () {
     // Act & Assert.
     strictEqual(
