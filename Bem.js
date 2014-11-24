@@ -6,8 +6,6 @@
  * Released under the MIT license.
  * https://github.com/eakoryakin/Bem.JS/blob/master/LICENSE
  *
- * Date: 2014-11-16T09:01Z
- * 
  * Dependencies:
  *  - jQuery 1.4.0+
  */
@@ -24,37 +22,37 @@ $(function () {
     bem.block = function () {
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block.
+        /// Creates a CSS class of the block.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the block.</returns>
+        /// <returns type="String">A CSS class of the block.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block.
+        /// Creates a CSS class of the block.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <param name="cssClass" type="String">One or more additional CSS-classes, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the block.</returns>
+        /// <param name="cssClass" type="String">One or more additional CSS classes, separated by a space.</param>
+        /// <returns type="String">A CSS class of the block.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block.
+        /// Creates a CSS class of the block.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <returns type="String">A CSS-class of the block.</returns>
+        /// <returns type="String">A CSS class of the block.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block.
+        /// Creates a CSS class of the block.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <param name="cssClasses" type="Array">A list of CSS-classes.</param>
-        /// <returns type="String">A CSS-class of the block.</returns>
+        /// <param name="cssClasses" type="Array">A list of CSS classes.</param>
+        /// <returns type="String">A CSS class of the block.</returns>
         /// </signature>
         if (arguments.length == 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
             var blockName = $.trim(arguments[0]),
@@ -102,7 +100,7 @@ $(function () {
                 resultingCssClass.append(" ");
             }
 
-            // Adding additional CSS-classes.
+            // Adding additional CSS classes.
             if (cssClasses.length > 0) {
                 for (var i = 0; i < cssClasses.length; i++) {
                     if (!isNullOrWhiteSpace(cssClasses[i])) {
@@ -121,28 +119,28 @@ $(function () {
     bem.blockModifier = function () {
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block's modifier.
+        /// Creates a CSS class of the block's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the block's modifier.</returns>
+        /// <returns type="String">A CSS class of the block's modifier.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block's modifier.
+        /// Creates a CSS class of the block's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="String">A CSS-class of the block's modifier.</returns>
+        /// <returns type="String">A CSS class of the block's modifier.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the block's modifier.
+        /// Creates a CSS class of the block's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <returns type="String">A CSS-class of the block's modifier.</returns>
+        /// <returns type="String">A CSS class of the block's modifier.</returns>
         /// </signature>
         if (arguments.length == 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
             var blockName = $.trim(arguments[0]),
@@ -209,49 +207,49 @@ $(function () {
     bem.element = function () {
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element.
+        /// Creates a CSS class of the element.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
-        /// <returns type="String">A CSS-class of the element.</returns>
+        /// <returns type="String">A CSS class of the element.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element.
+        /// Creates a CSS class of the element.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the element.</returns>
+        /// <returns type="String">A CSS class of the element.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element.
+        /// Creates a CSS class of the element.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <param name="cssClass" type="String">One or more additional CSS-classes, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the element.</returns>
+        /// <param name="cssClass" type="String">One or more additional CSS classes, separated by a space.</param>
+        /// <returns type="String">A CSS class of the element.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element.
+        /// Creates a CSS class of the element.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <returns type="String">A CSS-class of the element.</returns>
+        /// <returns type="String">A CSS class of the element.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element.
+        /// Creates a CSS class of the element.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <param name="cssClasses" type="Array">A list of CSS-classes.</param>
-        /// <returns type="String">A CSS-class of the element.</returns>
+        /// <param name="cssClasses" type="Array">A list of CSS classes.</param>
+        /// <returns type="String">A CSS class of the element.</returns>
         /// </signature>
         if (arguments.length == 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
             var blockName = $.trim(arguments[0]),
@@ -315,7 +313,7 @@ $(function () {
                 resultingCssClass.append(" ");
             }
 
-            // Adding additional CSS-classes.
+            // Adding additional CSS classes.
             if (cssClasses.length > 0) {
                 for (var i = 0; i < cssClasses.length; i++) {
                     if (!isNullOrWhiteSpace(cssClasses[i])) {
@@ -332,31 +330,31 @@ $(function () {
     bem.elementModifier = function () {
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element's modifier.
+        /// Creates a CSS class of the element's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-        /// <returns type="String">A CSS-class of the element's modifier.</returns>
+        /// <returns type="String">A CSS class of the element's modifier.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element's modifier.
+        /// Creates a CSS class of the element's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="String">A CSS-class of the element's modifier.</returns>
+        /// <returns type="String">A CSS class of the element's modifier.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Creates a CSS-class of the element's modifier.
+        /// Creates a CSS class of the element's modifier.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifiers" type="Array">A list of modifiers.</param>
-        /// <returns type="String">A CSS-class of the element's modifier.</returns>
+        /// <returns type="String">A CSS class of the element's modifier.</returns>
         /// </signature>
         if (arguments.length == 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
             var blockName = $.trim(arguments[0]),
@@ -430,72 +428,72 @@ $(function () {
     bem.getBlock = function () {
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
-        /// <param name="context" type="jQuery">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
-        /// <param name="context" type="jQuery">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched blocks.
+        /// Returns a list of matched blocks.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <param name="context" type="jQuery">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+        /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
+        /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
         /// </signature>
         if (arguments.length == 1 && typeof arguments[0] === "string") {
             return $("." + $.trim(arguments[0]));
         }
         if (arguments.length == 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
-            return $("." + bem.blockModifier(arguments[0], arguments[1]));
+            return $("." + bem.blockModifier(arguments[0], arguments[1]).replace(/\s/g, "."));
         }
         if (arguments.length == 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
-            return $("." + bem.blockModifier(arguments[0], arguments[1], arguments[2]));
+            return $("." + bem.blockModifier(arguments[0], arguments[1], arguments[2]).replace(/\s/g, "."));
         }
         if (arguments.length == 2 && typeof arguments[0] === "string" && typeof arguments[1] === "object") {
             return $("." + $.trim(arguments[0]), arguments[1]);
         }
         if (arguments.length == 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "object") {
-            return $("." + bem.blockModifier(arguments[0], arguments[1]), arguments[2]);
+            return $("." + bem.blockModifier(arguments[0], arguments[1]).replace(/\s/g, "."), arguments[2]);
         }
         if (arguments.length == 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "object") {
-            return $("." + bem.blockModifier(arguments[0], arguments[1], arguments[2]), arguments[3]);
+            return $("." + bem.blockModifier(arguments[0], arguments[1], arguments[2]).replace(/\s/g, "."), arguments[3]);
         }
 
         return $();
@@ -504,78 +502,78 @@ $(function () {
     bem.getElement = function () {
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
-        /// <param name="modifier" type="String">The modifier.</param>
+        /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
         /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         /// <signature>
         /// <summary>
-        /// Returns a collection of matched elements.
+        /// Returns a list of matched elements.
         /// </summary>
         /// <param name="blockName" type="String">The name of the block.</param>
         /// <param name="elementName" type="String">The name of the element.</param>
         /// <param name="modifierName" type="String">The name of the modifier.</param>
         /// <param name="modifierValue" type="String">The value of the modifier.</param>
         /// <param name="context" type="Element">A DOM-element or jQuery object to search in.</param>
-        /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+        /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
         /// </signature>
         if (arguments.length === 2 && typeof arguments[0] === "string" && typeof arguments[1] === "string") {
             return $("." + $.trim(arguments[0]) + bem.elementSeparator + $.trim(arguments[1]));
         }
         if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string") {
-            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]));
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]).replace(/\s/g, "."));
         }
         if (arguments.length === 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "string") {
-            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]));
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]).replace(/\s/g, "."));
         }
         if (arguments.length === 3 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "object") {
             return $("." + $.trim(arguments[0]) + bem.elementSeparator + $.trim(arguments[1]), arguments[2]);
         }
         if (arguments.length === 4 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "object") {
-            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]), arguments[3]);
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2]).replace(/\s/g, "."), arguments[3]);
         }
         if (arguments.length === 5 && typeof arguments[0] === "string" && typeof arguments[1] === "string" && typeof arguments[2] === "string" && typeof arguments[3] === "string" && typeof arguments[4] === "object") {
-            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]), arguments[4]);
+            return $("." + bem.elementModifier(arguments[0], arguments[1], arguments[2], arguments[3]).replace(/\s/g, "."), arguments[4]);
         }
 
         return $();
@@ -583,11 +581,11 @@ $(function () {
 
     bem.splitCssClasses = function (cssClasses) {
         /// <summary>
-        /// Creates a list of CSS-classes from the string.
-        /// <para>Removes duplicate CSS-classes.</para>
+        /// Creates a list of CSS classes from the string.
+        /// <para>Removes duplicate CSS classes.</para>
         /// </summary>
-        /// <param name="cssClasses" type="String">One or more CSS-classes, separated by a space.</param>
-        /// <returns type="Array">A list of CSS-classes.</returns>
+        /// <param name="cssClasses" type="String">One or more CSS classes, separated by a space.</param>
+        /// <returns type="Array">A list of CSS classes.</returns>
         var newCssClasses = [];
         cssClasses = $.trim(cssClasses);
 
@@ -668,7 +666,7 @@ $(function () {
             return true;
         }
 
-        return value.replace(/\s/g, '').length < 1;
+        return value.replace(/\s/g, "").length < 1;
     }
 
     // Nested types.
@@ -685,31 +683,34 @@ $(function () {
         }
     }
 
-    // jQuery-extensions.
+    // Methods (jQuery).
     jQuery.fn.extend({
 
         addModifier: function () {
             /// <signature>
             /// <summary>
-            /// Adds the modifier(s) to each block or element of the set of jQuery objects.
+            /// Adds the modifier(s) to each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Adds the modifier to each block or element of the set of jQuery objects.
+            /// Adds the modifier to each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Adds the modifier(s) to each block or element of the set of jQuery objects.
+            /// Adds the modifier(s) to each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);
@@ -731,10 +732,10 @@ $(function () {
 
         blockName: function () {
             /// <summary>
-            /// Returns the name of the first block of the set of jQuery objects.
-            /// <para>The name of the block is taken from the first CSS-class.</para>
+            /// Returns the name of the first block of the current set of jQuery objects.
+            /// <para>The name of the block is taken from the first CSS class.</para>
             /// </summary>
-            /// <returns type="String">The name of the block.</returns>
+            /// <returns type="String">The name of the block if there are any blocks or elements in the current set of jQuery objects; otherwise - an empty string.</returns>
             var cssClass = this.eq(0).attr("class"),
                 firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
 
@@ -748,10 +749,10 @@ $(function () {
 
         elementName: function () {
             /// <summary>
-            /// Returns the name of the first element of the set of jQuery objects.
-            /// <para>The name of the element is taken from the first CSS-class.</para>
+            /// Returns the name of the first element of the current set of jQuery objects.
+            /// <para>The name of the element is taken from the first CSS class.</para>
             /// </summary>
-            /// <returns type="String">The name of the element.</returns>
+            /// <returns type="String">The name of the element if there are any elements in the current set of jQuery objects; otherwise - an empty string.</returns>
             var cssClass = this.eq(0).attr("class"),
                 firstCssClass = cssClass ? cssClass.split(" ")[0] : "";
 
@@ -765,27 +766,27 @@ $(function () {
         getBlock: function () {
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched blocks, containing in the currunt set of jQuery objects.
+            /// Returns a list of matched blocks, containing in the current set of jQuery objects.
             /// </summary>
             /// <param name="blockName" type="String">The name of the block.</param>
-            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched blocks, containing in the currunt set of jQuery objects.
+            /// Returns a list of matched blocks, containing in the current set of jQuery objects.
             /// </summary>
             /// <param name="blockName" type="String">The name of the block.</param>
-            /// <param name="modifier" type="String">The modifier.</param>
-            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+            /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched blocks, containing in the currunt set of jQuery objects.
+            /// Returns a list of matched blocks, containing in the current set of jQuery objects.
             /// </summary>
             /// <param name="blockName" type="String">The name of the block.</param>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="jQuery-объект">A collection of matched blocks if there are any; otherwise - an empty collection.</returns>
+            /// <returns type="jQuery object">A list of matched blocks if there are any; otherwise - an empty list.</returns>
             /// </signature>
             return bem.getBlock.apply(null, Array.prototype.slice.call(arguments).concat([this]));
         },
@@ -793,30 +794,30 @@ $(function () {
         getElement: function () {
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched elements, containing in the currunt set of jQuery objects.
-            /// <para>The name of the block for the element is taken each time from the jQuery object in the currunt set of jQuery objects.</para>
+            /// Returns a list of matched elements, containing in the current set of jQuery objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery object in the current set of jQuery objects.</para>
             /// </summary>
             /// <param name="elementName" type="String">The name of the element.</param>
-            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched elements, containing in the currunt set of jQuery objects.
-            /// <para>The name of the block for the element is taken each time from the jQuery object in the currunt set of jQuery objects.</para>
+            /// Returns a list of matched elements, containing in the current set of jQuery objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery object in the current set of jQuery objects.</para>
             /// </summary>
             /// <param name="elementName" type="String">The name of the element.</param>
-            /// <param name="modifier" type="String">The modifier.</param>
-            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
+            /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Returns a collection of matched elements, containing in the currunt set of jQuery objects.
-            /// <para>The name of the block for the element is taken each time from the jQuery object in the currunt set of jQuery objects.</para>
+            /// Returns a list of matched elements, containing in the current set of jQuery objects.
+            /// <para>The name of the block for the element is taken each time from the jQuery object in the current set of jQuery objects.</para>
             /// </summary>
             /// <param name="elementName" type="String">The name of the element.</param>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="jQuery-объект">A collection of matched elements if there are any; otherwise - an empty collection.</returns>
+            /// <returns type="jQuery object">A list of matched elements if there are any; otherwise - an empty list.</returns>
             /// </signature>
             return bem.getElement.apply(null, [this.blockName()].concat(Array.prototype.slice.call(arguments), [this]));
         },
@@ -824,25 +825,25 @@ $(function () {
         hasModifier: function () {
             /// <signature>
             /// <summary>
-            /// Determines whether any of the set of jQuery objects has the given modifier.
+            /// Determines whether any of the set of jQuery objects has the modifier(s).
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="Boolean">True if any of the set of jQuery objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery objects has the modifier(s); otherwise - false.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Determines whether any of the set of jQuery objects has the given modifier.
+            /// Determines whether any of the set of jQuery objects has the modifier.
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="Boolean">True if any of the set of jQuery objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery objects has the modifier; otherwise - false.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Determines whether any of the set of jQuery objects has the given modifier.
+            /// Determines whether any of the set of jQuery objects has the modifier(s).
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="Boolean">True if any of the set of jQuery objects has the given modifier; otherwise - false.</returns>
+            /// <returns type="Boolean">True if any of the set of jQuery objects has the modifier(s); otherwise - false.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);
@@ -895,18 +896,20 @@ $(function () {
         modifierValue: function (modifierName, modifierValue) {
             /// <signature>
             /// <summary>
-            /// Returns the value of the modifier of the first block or element of the set of jQuery objects.
+            /// Returns the value of the modifier of the first block or element of the current set of jQuery objects.
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
-            /// <returns type="String">The value of the modifier.</returns>
+            /// <returns type="String">The value of the modifier if the block or element has the modifier; otherwise - an empty string.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Sets the value of the modifier of each block or element of the set of jQuery objects.
+            /// Sets the value of the modifier of each block or element of the current set of jQuery objects.
+            /// <para>The value of the modifier is set only if the modifier exists.</para>
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifierName">The name of the modifier.</param>
             /// <param name="modifierValue">The value of the modifier.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             if (arguments.length === 1) {
                 var cssClass = this.attr("class");
@@ -920,21 +923,24 @@ $(function () {
                 return matches ? matches[1] : "";
             }
             if (arguments.length === 2) {
-                var cssClass = this.attr("class");
+                for (var i = 0; i < this.length; i++) {
+                    var $element = $(this[i]),
+                        cssClass = $element.attr("class");
 
-                if (!modifierName || !modifierValue || !cssClass) {
-                    return this;
+                    if (!modifierName || !modifierValue || !cssClass) {
+                        continue;
+                    }
+
+                    $element.attr(
+                        "class",
+                        cssClass.replace(
+                            new RegExp(bem.modifierSeparator + modifierName + bem.modifierValueSeparator + "([a-z0-9-]+)", "ig"),
+                            function () {
+                                return bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
+                            }
+                        )
+                    );
                 }
-
-                this.attr(
-                    "class",
-                    cssClass.replace(
-                        new RegExp(bem.modifierSeparator + modifierName + bem.modifierValueSeparator + "([a-z0-9-]+)", "ig"),
-                        function () {
-                            return bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
-                        }
-                    )
-                );
 
                 return this;
             }
@@ -943,25 +949,28 @@ $(function () {
         removeModifier: function () {
             /// <signature>
             /// <summary>
-            /// Removes the modifier(s) from each block or element of the set of jQuery objects.
+            /// Removes the modifier(s) from each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifier" type="String">One or more modifiers, separated by a space.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Removes the modifier from each block or element of the set of jQuery objects.
+            /// Removes the modifier from each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifierName" type="String">The name of the modifier.</param>
             /// <param name="modifierValue" type="String">The value of the modifier.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             /// <signature>
             /// <summary>
-            /// Removes the modifier(s) from each block or element of the set of jQuery objects.
+            /// Removes the modifier(s) from each block or element of the current set of jQuery objects.
+            /// <para>This method retains chaining.</para>
             /// </summary>
             /// <param name="modifiers" type="Array">A list of modifiers.</param>
-            /// <returns type="jQuery object">The set of jQuery objects.</returns>
+            /// <returns type="jQuery object">The current set of jQuery objects.</returns>
             /// </signature>
             for (var i = 0; i < this.length; i++) {
                 var $element = $(this[i]);
