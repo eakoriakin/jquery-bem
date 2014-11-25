@@ -2,7 +2,7 @@
   "name": "bem-js",
   "title": "Bem.JS",
   "description": "A small JavaScript library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "Bem.js",
   "homepage": "http://kea.eqwad.com/bem-js",
   "author": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/eakoryakin/Bem.JS"
   },
   "keywords": [
-    "bem.js",
+    "BEM",
     "bem",
 	"methodology",
     "javascript",
