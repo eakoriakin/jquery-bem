@@ -1373,10 +1373,6 @@ test("$.fn.modifierValue: Sets the value of the modifier of a set of elements an
     // Act.
     var $products = $(".product_name").modifierValue("size", "m");
 
-    console.log($products.eq(0).attr("class"));
-    console.log($products.eq(1).attr("class"));
-    console.log($products.eq(2).attr("class"));
-
     // Assert.
     ok(
         $products.length === 3 &&

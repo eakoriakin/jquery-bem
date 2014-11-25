@@ -1,5 +1,5 @@
 ﻿/*!
- * BEM library 1.0.0 for JavaScript and jQuery.
+ * A small JavaScript library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes.
  * http://kea.eqwad.com/bem-js
  *
  * Copyright (c) 2014 Evgeny A. Koryakin.
