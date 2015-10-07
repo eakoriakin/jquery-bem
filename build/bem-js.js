@@ -19,8 +19,8 @@ window.bem = {};
         var parameters = arguments;
 
         if (parameters.length === 2 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                modifier = $.trim(parameters[1]);
+            var blockName = cleanName(parameters[0]),
+                modifier = parameters[1];
 
             if (isNullOrWhiteSpace(blockName)) {
                 return '';
@@ -29,14 +29,14 @@ window.bem = {};
             return blockName + ' ' + bem.blockModifier(blockName, modifier);
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                modifier = $.trim(parameters[1]),
-                cssClass = $.trim(parameters[2]);
+            var blockName = parameters[0],
+                modifier = parameters[1],
+                cssClass = parameters[2];
 
             return bem.block(blockName, bem.splitModifiers(modifier), bem.splitCssClasses(cssClass));
         }
         else if (parameters.length === 2 && typeof parameters[0] === 'string' && $.isArray(parameters[1])) {
-            var blockName = $.trim(parameters[0]),
+            var blockName = cleanName(parameters[0]),
                 modifiers = parameters[1];
 
             if (isNullOrWhiteSpace(blockName)) {
@@ -46,7 +46,7 @@ window.bem = {};
             return blockName + ' ' + bem.blockModifier(blockName, modifiers);
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && $.isArray(parameters[1]) && $.isArray(parameters[2])) {
-            var blockName = $.trim(parameters[0]),
+            var blockName = cleanName(parameters[0]),
                 modifiers = parameters[1],
                 cssClasses = parameters[2];
 
@@ -84,8 +84,8 @@ window.bem = {};
         var parameters = arguments;
 
         if (parameters.length === 2 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                modifier = $.trim(parameters[1]);
+            var blockName = cleanName(parameters[0]),
+                modifier = parameters[1];
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(modifier)) {
                 return '';
@@ -94,9 +94,9 @@ window.bem = {};
             return bem.blockModifier(blockName, bem.splitModifiers(modifier));
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                modifierName = $.trim(parameters[1]),
-                modifierValue = $.trim(parameters[2]);
+            var blockName = cleanName(parameters[0]),
+                modifierName = cleanName(parameters[1]),
+                modifierValue = cleanName(parameters[2]);
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(modifierName) || isNullOrWhiteSpace(modifierValue)) {
                 return '';
@@ -105,10 +105,10 @@ window.bem = {};
             return blockName + bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
         }
         else if (parameters.length === 2 && typeof parameters[0] === 'string' && $.isArray(parameters[1])) {
-            var blockName = $.trim(parameters[0]),
+            var blockName = cleanName(parameters[0]),
                 modifiers = parameters[1];
 
-            if (isNullOrWhiteSpace(blockName) || modifiers.length == 0) {
+            if (isNullOrWhiteSpace(blockName) || modifiers.length === 0) {
                 return '';
             }
 
@@ -149,8 +149,8 @@ window.bem = {};
         var parameters = arguments;
 
         if (parameters.length === 2 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]);
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]);
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName)) {
                 return '';
@@ -159,9 +159,9 @@ window.bem = {};
             return blockName + bem.elementSeparator + elementName;
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
-                modifier = $.trim(parameters[2]);
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
+                modifier = parameters[2];
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName)) {
                 return '';
@@ -170,16 +170,16 @@ window.bem = {};
             return blockName + bem.elementSeparator + elementName + ' ' + bem.elementModifier(blockName, elementName, modifier);
         }
         else if (parameters.length === 4 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string' && typeof parameters[3] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
-                modifier = $.trim(parameters[2]),
-                cssClass = $.trim(parameters[3]);
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
+                modifier = parameters[2],
+                cssClass = parameters[3];
 
             return bem.element(blockName, elementName, bem.splitModifiers(modifier), bem.splitCssClasses(cssClass));
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && $.isArray(parameters[2])) {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
                 modifiers = parameters[2];
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || modifiers.length === 0) {
@@ -189,8 +189,8 @@ window.bem = {};
             return blockName + bem.elementSeparator + elementName + ' ' + bem.elementModifier(blockName, elementName, modifiers);
         }
         else if (parameters.length === 4 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && $.isArray(parameters[2]) && $.isArray(parameters[3])) {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
                 modifiers = parameters[2],
                 cssClasses = parameters[3];
 
@@ -228,9 +228,9 @@ window.bem = {};
         var parameters = arguments;
 
         if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
-                modifier = $.trim(parameters[2]);
+            var blockName = parameters[0],
+                elementName = parameters[1],
+                modifier = parameters[2];
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || isNullOrWhiteSpace(modifier)) {
                 return '';
@@ -239,10 +239,10 @@ window.bem = {};
             return bem.elementModifier(blockName, elementName, bem.splitModifiers(modifier));
         }
         else if (parameters.length === 4 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && typeof parameters[2] === 'string' && typeof parameters[3] === 'string') {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
-                modifierName = $.trim(parameters[2]),
-                modifierValue = $.trim(parameters[3]);
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
+                modifierName = cleanName(parameters[2]),
+                modifierValue = cleanName(parameters[3]);
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || isNullOrWhiteSpace(modifierName) || isNullOrWhiteSpace(modifierValue)) {
                 return '';
@@ -251,8 +251,8 @@ window.bem = {};
             return blockName + bem.elementSeparator + elementName + bem.modifierSeparator + modifierName + bem.modifierValueSeparator + modifierValue;
         }
         else if (parameters.length === 3 && typeof parameters[0] === 'string' && typeof parameters[1] === 'string' && $.isArray(parameters[2])) {
-            var blockName = $.trim(parameters[0]),
-                elementName = $.trim(parameters[1]),
+            var blockName = cleanName(parameters[0]),
+                elementName = cleanName(parameters[1]),
                 modifiers = parameters[2];
 
             if (isNullOrWhiteSpace(blockName) || isNullOrWhiteSpace(elementName) || modifiers.length === 0) {
@@ -263,6 +263,8 @@ window.bem = {};
 
             for (var i = 0; i < modifiers.length; i++) {
                 var modifier = modifiers[i];
+                modifier.name = cleanName(modifier.name);
+                modifier.value = cleanName(modifier.value);
 
                 if (isNullOrWhiteSpace(modifier.name)) {
                     continue;
@@ -363,7 +365,7 @@ window.bem = {};
         var splittedCssClasses = cssClasses.split(' ');
 
         for (var i = 0; i < splittedCssClasses.length; i++) {
-            var cssClass = splittedCssClasses[i],
+            var cssClass = cleanName(splittedCssClasses[i]),
                 cssClassExists = false;
 
             for (var j = 0; j < newCssClasses.length; j++) {
@@ -398,7 +400,7 @@ window.bem = {};
         var splittedModifiers = modifiers.split(' ');
 
         for (var i = 0; i < splittedModifiers.length; i++) {
-            var modifier = splittedModifiers[i],
+            var modifier = cleanName(splittedModifiers[i]),
                 modifierParts = modifier.split(bem.modifierValueSeparator),
                 modifierName = modifierParts[0],
                 modifierValue = modifierParts.length === 2 ? modifierParts[1] : '',
@@ -434,6 +436,23 @@ window.bem = {};
         }
 
         return value.replace(/\s/g, '').length < 1;
+    }
+
+    /**
+     * Removes the separators from the start and end of the string.
+     * @param {string} value The string to clean.
+     * @returns {string} A string cleaned from the separators.
+     */
+    function cleanName(value) {
+        value = $.trim(value);
+
+        // Remove separators from the start of the string.
+        value = value.replace(new RegExp('^[' + bem.elementSeparator + bem.modifierSeparator + bem.modifierValueSeparator + ']+'), '');
+
+        // Remove separators from the end of the string.
+        value = value.replace(new RegExp('[' + bem.elementSeparator + bem.modifierSeparator + bem.modifierValueSeparator + ']+$'), '');
+
+        return value;
     }
 
     // Nested types.
