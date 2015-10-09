@@ -5,4 +5,4 @@ Bem.JS is a small JavaScript library that helps to create CSS classes according 
 
 # API documentation
 
-Detailed API documentation can be found [here](https://github.com/eakoryakin/Bem.JS/wiki/Bem.JS).
+Detailed API documentation can be found [here](https://github.com/eakoryakin/Bem.JS/wiki).
