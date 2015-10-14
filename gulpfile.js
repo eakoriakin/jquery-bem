@@ -20,14 +20,14 @@ gulp.task('default', ['build', 'watch']);
 
 gulp.task('concatenate-js', function () {
     return gulp.src(paths.source.js)
-        .pipe(concat('bem-js.js'))
+        .pipe(concat('jquery-bem.js'))
         .pipe(gulp.dest(paths.build.path));
 });
 
 gulp.task('minify-js', function () {
     return gulp.src(paths.source.js)
         .pipe(uglify())
-        .pipe(concat('bem-js.min.js'))
+        .pipe(concat('jquery-bem.min.js'))
         .pipe(gulp.dest(paths.build.path));
 });
 

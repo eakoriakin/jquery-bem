@@ -1,17 +1,17 @@
 {
     "version": "1.4.0",
     "name": "bem-js",
-    "title": "Bem.JS",
+    "title": "jQuery.BEM",
     "description": "A small JavaScript library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes.",
-    "homepage": "http://kea.eqwad.com/bem-js",
+    "homepage": "https://github.com/eakoryakin/jquery-bem",
     "author": {
         "name": "Evgenii Koriakin",
-        "url": "http://kea.eqwad.com"
+        "url": "https://github.com/eakoryakin"
     },
     "license": "(MIT OR Apache-2.0)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/eakoryakin/Bem.JS"
+        "url": "https://github.com/eakoryakin/jquery-bem"
     },
     "keywords": [
         "BEM",
@@ -21,7 +21,7 @@
         "jquery-plugin"
     ],
     "bugs": {
-        "url": "https://github.com/eakoryakin/Bem.JS/issues"
+        "url": "https://github.com/eakoryakin/jquery-bem/issues"
     },
     "dependencies": {
         "jquery": ">=1.4.0"
