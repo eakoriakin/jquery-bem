@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2015 Evgenii Koriakin.
  * Released under the MIT license.
-  */
+ */
 window.bem = {};
 
 (function (bem) {
