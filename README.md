@@ -1,6 +1,6 @@
 jQuery.BEM
 ==========
-jQuery.BEM is a small JavaScript library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes. More about the BEM methodology can be found here.
+jQuery.BEM is a small jQuery library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes.
 
 # Download
 * [The compressed, production jQuery.BEM](https://github.com/eakoryakin/jquery-bem/blob/master/build/jquery-bem.min.js)

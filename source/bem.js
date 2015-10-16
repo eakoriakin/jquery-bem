@@ -1,5 +1,5 @@
 ﻿/*!
- * A small JavaScript library that helps to create CSS classes according to the BEM methodology and add, remove, modify CSS classes of DOM elements or select DOM elements by BEM-like CSS classes.
+ * A small jQuery library that helps to create CSS classes according to the BEM methodology.
  * https://github.com/eakoryakin/jquery-bem
  *
  * Copyright (c) 2015 Evgenii Koriakin.
