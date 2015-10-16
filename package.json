@@ -1,5 +1,5 @@
 {
-    "version": "1.4.3",
+    "version": "1.4.4",
     "name": "bem-js",
     "title": "jQuery.BEM",
     "description": "A small jQuery library that helps to create CSS classes according to the BEM methodology.",
